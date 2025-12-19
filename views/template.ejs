@@ -6,7 +6,7 @@
 
     <button type="submit" class="btn btn-warning"><a href="/blogs/<%= blogId %>/edit">Edit</a></button>
     <form action="/blogs/<%= blogId %>/delete?_method=DELETE" method="POST" style="display:inline;">
-        <button type="submit" onclick="return confirm('Delete this blog?')">Delete</button>
+        <button type="submit" onclick="return confirm('Delete this blog?')" class="btn btn-warning">Delete</button>
       </form>
       
     
