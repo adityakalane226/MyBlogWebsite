@@ -1,27 +1,76 @@
-<!-- header -->
 <%- include('partials/header.ejs') %>
-<div class="container-form">
-  <% if (editMode) {%>
-    <h1>Edit Blog</h1>
-    <form action="/blogs/<%= blogId %>/submit" method="POST">
-      <label for="title">Title</label>
-      <input type="text" name="title" id="title" value="<%= blog.title %>"/>
-      <textarea name="textbox" id="textbox"><%= blog.text %></textarea>
-      <button class="btn btn-primary" type="submit">submit</button>
-    </form>
-  <% }else{%>
-  <h1>Write you blog here</h1>
 
-  <form action="/submit" method="post">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="custom-card p-4 p-md-5">
+        <% if (editMode) { %>
+          <h1 class="h3 fw-bold mb-4">Edit Blog Post</h1>
 
-    <label for="title">Title</label>
-    <input type="text" name="title" id="title">
-    <textarea name="textbox" id="textbox"> </textarea>
-    <button class="btn btn-primary" type="submit">submit</button>
-    
-  </form>
-  <% } %>
+          <form action="/blogs/<%= blogId %>/submit" method="POST">
+            <div class="mb-3">
+              <label for="title" class="form-label text-light fw-medium">Title</label>
+              <input
+                type="text"
+                class="form-control form-control-custom"
+                name="title"
+                id="title"
+                value="<%= blog.title %>"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="textbox" class="form-label text-light fw-medium">Content</label>
+              <textarea
+                class="form-control form-control-custom"
+                name="textbox"
+                id="textbox"
+                rows="8"
+                required
+              ><%= blog.text %></textarea>
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+              <a href="/blogs/<%= blogId %>" class="btn btn-outline-secondary">Cancel</a>
+              <button class="btn btn-primary" type="submit">Save Changes</button>
+            </div>
+          </form>
+
+        <% } else { %>
+          <h1 class="h3 fw-bold mb-2">Write a New Blog Post</h1>
+          <p class="text-secondary mb-4">Create your blog post below.</p>
+
+          <form action="/submit" method="POST">
+            <div class="mb-3">
+              <label for="title" class="form-label text-light fw-medium">Title</label>
+              <input
+                type="text"
+                class="form-control form-control-custom"
+                name="title"
+                id="title"
+                placeholder="Enter blog title"
+                required
+              />
+            </div>
+            <div class="mb-4">
+              <label for="textbox" class="form-label text-light fw-medium">Content</label>
+              <textarea
+                class="form-control form-control-custom"
+                name="textbox"
+                id="textbox"
+                rows="8"
+                placeholder="Write your content here..."
+                required
+              ></textarea>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="/blogs" class="btn btn-outline-secondary">View All Blogs</a>
+              <button class="btn btn-primary px-4" type="submit">Submit</button>
+            </div>
+          </form>
+        <% } %>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- footer -->
 <%- include('partials/footer.ejs') %>

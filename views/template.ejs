@@ -1,15 +1,44 @@
-<%-include("partials/header.ejs") %>
-<div class="container-template">
-    <h1><%= blog.title %></h1>
-    <hr>
-    <p><%= blog.text %></p>
+<%- include("partials/header.ejs") %>
 
-    <button type="submit" class="btn btn-warning"><a href="/blogs/<%= blogId %>/edit">Edit</a></button>
-    <form action="/blogs/<%= blogId %>/delete?_method=DELETE" method="POST" style="display:inline;">
-        <button type="submit" onclick="return confirm('Delete this blog?')" class="btn btn-warning">Delete</button>
-      </form>
-      
-    
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="mb-3">
+        <a href="/blogs" class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-arrow-left me-1"></i> Back to Blogs
+        </a>
+      </div>
+
+      <article class="custom-card p-4 p-md-5">
+        <small class="text-secondary d-block mb-2">
+          <%= blog.created_at ? new Date(blog.created_at).toLocaleDateString() : '' %>
+        </small>
+
+        <h1 class="h2 fw-bold mb-4 text-white"><%= blog.title %></h1>
+
+        <div class="article-content mb-5">
+<%= blog.text %>
+        </div>
+
+        <div class="pt-3 border-top border-secondary border-opacity-25 d-flex justify-content-between align-items-center">
+          <a href="/blogs" class="btn btn-outline-secondary btn-sm">Back</a>
+
+          <div class="d-flex gap-2">
+            <a href="/blogs/<%= blogId %>/edit" class="btn btn-warning btn-sm">Edit</a>
+            <form action="/blogs/<%= blogId %>/delete?_method=DELETE" method="POST" class="d-inline">
+              <button
+                type="submit"
+                onclick="return confirm('Delete this blog post?')"
+                class="btn btn-danger btn-sm"
+              >
+                Delete
+              </button>
+            </form>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
 </div>
 
-<%-include("partials/footer.ejs") %>
+<%- include("partials/footer.ejs") %>
